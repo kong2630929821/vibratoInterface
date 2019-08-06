@@ -36,6 +36,11 @@ module.exports = {
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
+      //配置less
+      {
+        test:/\.less$/,
+        loader:'less-loader!style-loader!css-loader'
+      },
       {
         test: /\.js$/,
         loader: 'babel-loader',
