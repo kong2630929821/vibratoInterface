@@ -18,8 +18,8 @@
             </div>
             <div class="login">
                 <el-row>
-                    <el-button type="primary">登录</el-button>
-                    <el-button type="success">注册</el-button>
+                    <el-button type="primary" @click="login">登录</el-button>
+                    <el-button type="success" @click="registered">注册</el-button>
                 </el-row>
             </div>
         </div>
@@ -37,6 +37,7 @@ export default {
     name:'NavigationBar',
     data () {
         return {
+            appWidth:414,//手机端边界
             logo:{
                 src:'../../static/images/logo/logo.png',//logo图片地址
                 title:'LOGO',//logo名字
@@ -62,18 +63,26 @@ export default {
     },
     methods:{
         checkTab(num){
-            //切换tab
+            // 切换tab
             this.$router.push({name:this.navBarList[num],params:{index:0}});
             this.activeIndex=num;
             this.menuActive.fg=0
         },
         meumClick(){
-            //手机端下拉菜单展开
+            // 手机端下拉菜单展开
             this.menuActive.fg=this.menuActive.fg?0:1
+        },
+        login(){
+            // 登录
+            this.$message({message:'登录功能暂定',type:'success',offset:this.screenWidth<=this.appWidth?this.appWidth:20});
+        },
+        registered(){
+            // 注册
+            this.$message({message:'注册功能暂定',type:'success',offset:this.screenWidth<=this.appWidth?this.appWidth:20});
         }
     },
     mounted(){
-        //获取屏幕宽度
+        // 获取屏幕宽度
         const _this = this;
         window.onresize = () => {
             return (() => {
@@ -83,7 +92,7 @@ export default {
         }
     },
     watch: {
-        //监听屏幕宽度
+        // 监听屏幕宽度
         screenWidth (val) {
             if (!this.timer) {
                 this.screenWidth = val
