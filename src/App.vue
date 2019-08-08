@@ -16,4 +16,11 @@ export default {
   padding: 0;
   list-style: none;
 }
+.el-message{
+  min-width: 0;
+  max-width: 300px;
+}
+.el-message__content{
+  white-space: nowrap;
+}
 </style>

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="loginBox">
         <div class="tabBar">
             <div class="logoImg" v-show="screenWidth>414">
                 <img :src="logo.src" alt="这是一个logo" class="logo"/>
@@ -26,6 +26,7 @@
         <div class="tabList-2" v-show="screenWidth<=414 && menuActive.fg==1">
             <div class="tabListItem" v-for="(v,i) in tabList" :key="i" :class="{'tabActiveApp':i==activeIndex}" @click="checkTab(i)">{{v}}</div>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -48,12 +49,21 @@ export default {
             menuActive:{
                 fg:0,//默认样式
                 arr:[[42,42,42],[33,22,42]]//样式宽度数组
-            }
+            },
+            navBarList:[
+                'index',//首页
+                'batchDewateringLink',//批量去水印按链接
+                'batchDewateringUser',//批量去水印按用户
+                'pseudoOriginal',//视频伪原创
+                'videoLibrary',//无水印视频仓库
+                'customerService'//客服
+            ]
         }
     },
     methods:{
         checkTab(num){
             //切换tab
+            this.$router.push({name:this.navBarList[num],params:{index:0}});
             this.activeIndex=num;
             this.menuActive.fg=0
         },
@@ -95,6 +105,9 @@ export default {
     }
     .tabActiveApp{
         background: rgba(136,136,136,1);
+    }
+    .loginBox{
+        position: relative;
     }
     .tabBar{
         display: flex;
@@ -153,8 +166,10 @@ export default {
         }
     }
     .tabList-2{
-        display: flex;
-        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100vw;
         background:rgba(0,0,0,1);
         color:#FCDC3C;
         .tabListItem{
